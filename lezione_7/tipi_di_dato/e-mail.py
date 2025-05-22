@@ -20,7 +20,7 @@ stato salvato il codice.
 import re
 class Email:
     def __init__(self,email:str):
-         if not re.fullmatch(r'[^@]+@[^@]+\.[^@]+',email):
+         if not re.fullmatch(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",email):
               raise ValueError("Email npon valida. ")
          self._email=email
 
