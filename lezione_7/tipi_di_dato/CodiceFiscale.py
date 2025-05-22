@@ -19,7 +19,7 @@ stato salvato il codice.
 import re
 class CF:
     def __init__(self,cf:str):
-        if not re.fullmatch(r'[A-Z0-9]{16}',cf.upper()):
+        if not re.fullmatch(r"[A-Z]{6}[0-9]{2}[A-EHLMPR-T][0-9]{2}[A-Z][0-9]{3}[A-Z]$",cf.upper()):
             raise ValueError("Codice fiscale non valido , deve essere lungo 16 carartteri alfanumerici.")
         
         self._cf=cf.upper()
@@ -36,7 +36,7 @@ class CF:
     def __str__(self):
         return self._cf
 
-c=CF("LPADFK36T26D932S")
+c=CF("LPADFK36T26D932s")
 print(c.get_cf())
 print(hash(c))
 c1=CF("LPADFK36T26D932S")
