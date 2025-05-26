@@ -1,9 +1,10 @@
 from tipiDato import IntGZ
 from tipiDato import DataGE1895
+from datetime import timedelta
 
 
 class Volo :
-    def __init__(self,codice:str,durata_min:IntGZ):
+    def __init__(self,codice:str,durata_min):
         self.__codice= codice #immutabile
         self.set_durata(durata_min)
 
@@ -11,7 +12,7 @@ class Volo :
         return self.__codice
     
     def get_durata(self)->IntGZ:
-        return self._durata_min
+        return timedelta(self._durata_min,minutes=self._durata_min)
 
     def set_durata(self,v:IntGZ):
        try:
@@ -75,7 +76,7 @@ class Citta:
         self._nome=valore
 
 
-durata = IntGZ(90)
+durata =90
 v = Volo("AZ001", durata)
 
 print("Codice volo:", v.get_codice())         
