@@ -34,7 +34,7 @@ class CompagniaAerea:
         return self.__anno
 
 
-#Aeroporto
+#Aeroporto.
 
 class Aeroporto:
     def __init__(self,codice:str,nome:str):
@@ -69,10 +69,9 @@ class Citta:
         self._abitanti=IntGZ(valore)
 
 
-try:
-    v = Volo("AZ123", "120")  
-    print(v.get_durata())  
-    
-    v.set_durata(0)  
-except Exception as e:
-    print(f"Errore atteso: {e}")
+durata = IntGZ(90)
+v = Volo("AZ001", durata)
+
+print("Codice volo:", v.get_codice())         
+print("Durata (min):", v.get_durata())        
+print("Tipo:", type(v.get_durata()))           
