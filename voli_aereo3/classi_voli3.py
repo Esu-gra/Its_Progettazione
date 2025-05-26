@@ -32,6 +32,9 @@ class CompagniaAerea:
     
     def get_anno_fondazione(self):
         return self.__anno
+    
+    def set_nome(self,valore:str):
+         self.__nome=valore
 
 
 #Aeroporto.
@@ -48,8 +51,8 @@ class Aeroporto:
     def get_codice(self)->str:
         return self.__codice
     
-    def set_ome(self,valore:str):
-        self._nome=valore.strip().upper()
+    def set_nome(self,valore:str):
+        self._nome=valore
 
 #citta
 
@@ -65,8 +68,11 @@ class Citta:
     def get_abitanti(self)->IntGZ:
         return self._abitanti
     
-    def set_abbitanti(self,valore):
+    def set_abbitanti(self,valore:IntGZ):
         self._abitanti=IntGZ(valore)
+
+    def set_nome(self,valore:str):
+        self._nome=valore
 
 
 durata = IntGZ(90)
