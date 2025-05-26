@@ -1,0 +1,78 @@
+from tipiDato import IntGZ
+from tipiDato import DataGE1895
+
+
+class Volo :
+    def __init__(self,codice:str,durata_min:IntGZ):
+        self.__codice= codice #immutabile
+        self.set_durata(durata_min)
+
+    def get_codice(self)->str:
+        return self.__codice
+    
+    def get_durata(self)->IntGZ:
+        return self._durata_min
+
+    def set_durata(self,v:IntGZ):
+       try:
+           self._durata_min=IntGZ(v)
+       except ValueError:
+           raise ValueError(f"Valore non valido per la durata")
+
+
+#copmagnia
+
+class CompagniaAerea:
+    def __init__(self,nome:str,anno_fondazione:DataGE1895):
+        self.__nome=nome
+        self.__anno=DataGE1895(anno_fondazione)
+    
+    def get_nome(self)->str:
+        return self.__nome
+    
+    def get_anno_fondazione(self):
+        return self.__anno
+
+
+#Aeroporto
+
+class Aeroporto:
+    def __init__(self,codice:str,nome:str):
+        self.__codice=codice #immutabile
+        self._nome=nome
+
+    def get_nome(self)->str:
+        return self._nome
+    
+
+    def get_codice(self)->str:
+        return self.__codice
+    
+    def set_ome(self,valore:str):
+        self._nome=valore.strip().upper()
+
+#citta
+
+
+class Citta:
+    def __init__(self,nome,num_abitanti:IntGZ):
+        self._nome=nome
+        self._abitanti=num_abitanti
+    
+    def get_nome(self)->str:
+        return self._nome
+
+    def get_abitanti(self)->IntGZ:
+        return self._abitanti
+    
+    def set_abbitanti(self,valore):
+        self._abitanti=IntGZ(valore)
+
+
+try:
+    v = Volo("AZ123", "120")  
+    print(v.get_durata())  
+    
+    v.set_durata(0)  
+except Exception as e:
+    print(f"Errore atteso: {e}")
