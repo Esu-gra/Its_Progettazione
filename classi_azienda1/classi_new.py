@@ -12,7 +12,7 @@ class Impiegato:
     _cognome: str # noto alla nascita
     _nascita: date # immutabile, noto alla nascita
     _stipendio: Importo # noto alla nascita
-    _afferenza: _afferenza | None # da assoc. 'afferenza' [1..1], possibilmente non noto alla nascita
+    _progetti:dict[Progetto,ImpiegatoProggetto]#da assoc. 'ImpiegatoProgetto'[0..*]
 
     def __init__(self, nome:str, cognome:str, nascita:date, stipendio:Importo,
                  dipartimento_aff: Dipartimento | None = None, data_afferenza: date | None=None) -> None:
@@ -65,15 +65,28 @@ class Impiegato:
         self._stipendio = stipendio
 
 
+    def progetto(self)->frozenset:
+        return frozenset
+
+
 
 class Progetto:
     _nome: str # noto alla nascita
     _budget: Importo
     _impiegati_prog:dict[Impiegato,ImpiegatoProggetto._link]
+    
 
-    def __init__(self, nome:str, budget:Importo) -> None:
-        self.set_nome(nome)
+
+    def __init__(self, nome:str, budget:Importo,_impiegati_parte:set=set(Impiegato)) -> None:
+        self.nome(nome)
         self.set_budget(budget)
+        self.impiegati_partecipano(_impiegati_parte)
+
+    
+    
+    def impiegati_partecipano(self)->frozenset:
+        return self._impiegati_parte
+
 
     def set_nome(self, nome:str) -> None:
         self._nome = nome
@@ -143,15 +156,25 @@ class Progetto:
 
     
 class ImpiegatoProggetto:
+      
+      @classmethod
+      def add(cls,progetto:Progetto,impiegato:Impiegato,data:date)->None:
+          l=cls._link(progetto,impiegato,data)
+          progetto._add_link_imp_prog(l)
+          impiegato._add_link_imp_prog(l)
+
+
       class _link:
           _impiegato:Impiegato
           _progetto:Progetto
           _data:date
+          _progetti={}
 
       def __init__(self,i:Impiegato,p:Progetto,d:date):
           self._impiegato:Impiegato=i
           self._progetto:Progetto=p
           self._data:date=d
+          
       
       def impiegato(self):
           return self._impiegato
@@ -161,8 +184,12 @@ class ImpiegatoProggetto:
           return self._progetto
       
 
+      
+          
+      
+
       def __hash__(self)->int:
-          return hash(self.impiegato(),self.progetto())
+          return hash((self.impiegato(),self.progetto()))
       def __eq__(self, other):
           if type(self)!=type(other) or hash(self)!=hash(other):
               return False
