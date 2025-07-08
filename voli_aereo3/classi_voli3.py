@@ -1,6 +1,7 @@
 from tipiDato import IntGZ
 from tipiDato import DataGE1895
 from datetime import timedelta
+from citta_nazione import *
 
 
 class Volo :
@@ -11,8 +12,8 @@ class Volo :
     def get_codice(self)->str:
         return self.__codice
     
-    def get_durata(self)->IntGZ:
-        return timedelta(self._durata_min,minutes=self._durata_min)
+    def get_durata(self) -> timedelta:
+       return timedelta(minutes=self._durata_min)
 
     def set_durata(self,v:IntGZ):
        try:
@@ -74,6 +75,26 @@ class Citta:
 
     def set_nome(self,valore:str):
         self._nome=valore
+
+
+# class Nazione:
+#     _name:str
+#     citta:CittaNazione._Link
+    
+
+#     def get_nome(self):
+#         return self._name
+    
+#     def set_nome(self,v:str):
+#         self._name=v
+        
+#     def __init__(self,nome:str):
+#         self.get_nome()
+
+    
+
+
+
 
 
 durata =90
