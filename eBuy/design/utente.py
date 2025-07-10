@@ -11,24 +11,24 @@ class Utente(ABC):
     _registrazione:datetime
 
     def __init__(self,username:str,registrazione:datetime):
-        self.username=username
-        self.registrazione=registrazione
+        self._username=username
+        self._registrazione=registrazione
     
-    @abstractmethod
+    @property
     def username(self):
         return self._username
     
-    @abstractmethod 
+    @property
     def registrazione(self):
         return self._registrazione
     
 
-    ## le operazioni di classe 
-    @abstractmethod
-    def popolarita(self,i:datetime):
+    ## le operazioni di classe ,
+    @classmethod
+    def popolarita(i:datetime):
         pass
-    @abstractmethod
-    def affidabilita(self):
+    @classmethod
+    def affidabilita(i:datetime)->float|None:
         pass
 
 
@@ -56,12 +56,6 @@ vetrina=URL(URL("https://www.mioshop.it/vetrina123"))
 v=VenditoreProfessionale("esu-gra",12-10-2003,vetrina)
 
 
-
-###classe UtentePrivato
-
-class UtentePrivato(Utente):
-    def __init__(self, username, registrazione):
-        super().__init__(username, registrazione)
 
 
 
