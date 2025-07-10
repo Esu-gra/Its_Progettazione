@@ -9,7 +9,7 @@ from custom_types import *
 class Utente(ABC):
     _username:str #immutabile
     _registrazione:datetime
-
+    @abstractmethod
     def __init__(self,username:str,registrazione:datetime):
         self._username=username
         self._registrazione=registrazione

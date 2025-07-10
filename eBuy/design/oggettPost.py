@@ -8,6 +8,9 @@ class OggettoDelPost(ABC):
     _anni_garanzia:IntGEZ
     _pubblicazione:datetime #immutabile#
     _prezzo:FloatGEZ
+
+    
+    @abstractmethod
     def __init__(self,descrizione:str,anni_garanzia:IntGEZ,pubblicazione:datetime,prezzo:FloatGEZ):
         super().__init__()
         self.set_descrizione(descrizione)
