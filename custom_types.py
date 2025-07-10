@@ -1,6 +1,8 @@
 from typing import Self
 import re
 from datetime import date
+
+
 class Importo(float):
 	def __new__(cls, v:int|float|str)->Self:
 		if v < 0:
@@ -71,3 +73,36 @@ class DataGE1895(date):
         if year < 1895:
             raise ValueError("Anno non valido deve essere maggioreo uguale a  1895")
         return super().__new__(cls,year,month,day)
+    
+
+
+
+
+class URL:
+    def __init__(self, indirizzo: str):
+        if not self._valida_url(indirizzo):
+            raise ValueError(f"URL non valido: {indirizzo}")
+        self.indirizzo = indirizzo
+
+    def _valida_url(self, url: str) -> bool:
+       
+        pattern = r'^https?://[\w\-\.]+\.\w+.*$'
+        return re.match(pattern, url) is not None
+
+    def __str__(self):
+        return self.indirizzo
+
+
+
+class FloatGEZ(float):
+    def __new__(cls, v: int | float | str):
+        try:
+            value = float(v)
+        except ValueError:
+            raise TypeError(f"Il valore '{v}' non è convertibile in float.")
+        
+        if value < 0:
+            raise ValueError(f"Il valore inserito deve essere maggiore o uguale a zero: {value}")
+        
+        return super().__new__(cls, value)
+

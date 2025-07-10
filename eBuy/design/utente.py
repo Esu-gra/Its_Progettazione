@@ -1,21 +1,10 @@
 from abc import *
 from datetime import datetime
+from custom_types import *
 
-import re
 
-class URL:
-    def __init__(self, indirizzo: str):
-        if not self._valida_url(indirizzo):
-            raise ValueError(f"URL non valido: {indirizzo}")
-        self.indirizzo = indirizzo
 
-    def _valida_url(self, url: str) -> bool:
-        # Controllo basilare con espressione regolare
-        pattern = r'^https?://[\w\-\.]+\.\w+.*$'
-        return re.match(pattern, url) is not None
 
-    def __str__(self):
-        return self.indirizzo
 
 class Utente(ABC):
     _username:str #immutabile
@@ -74,4 +63,5 @@ class UtentePrivato(Utente):
     def __init__(self, username, registrazione):
         super().__init__(username, registrazione)
 
-        
+
+
