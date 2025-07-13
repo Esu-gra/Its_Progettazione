@@ -1,33 +1,40 @@
 from datetime import datetime
-import UtentePrivato
+from UtentePrivato import UtentePrivato
 from custom_types import *
 from Bid import Bid 
 
 class Asta :
     _scadenza:datetime
     _prezzo_rialzo:FloatGEZ
+    _bid_asta:set['Bid'] = set()
     
 
     def __init__(self,scadenza:datetime,prezzo_rialzo:FloatGEZ):
-        self.scadenza(scadenza)
-        self.prezzo_rialzo(prezzo_rialzo)
+        self.set_scadenza(scadenza)
+        self.set_prezzo_rialzo(prezzo_rialzo)
         
 
-    @property
+
     def scadenza(self):
         return self._scadenza
     
-    @scadenza.setter
     def set_scadenza(self,v:datetime):
         self._scadenza=v
 
-    @property
+    
     def prezzo_rialzo(self)->FloatGEZ:
         return self._prezzo_rialzo
     
-    @prezzo_rialzo.setter
+   
     def set_prezzo_rialzo(self,v:FloatGEZ):
         self._prezzo_rialzo=v
+    
+
+    def aggiungi_bid(self,b:Bid):
+        self._bid_asta.add(b)
+    
+    def bids(self)->frozenset:
+        return frozenset(self._bid_asta)
 
     
 

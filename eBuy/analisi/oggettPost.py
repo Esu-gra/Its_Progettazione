@@ -59,3 +59,18 @@ class OggettoDelPost(ABC):
 
 
 
+
+class VenditoreProfessionale(Utente):
+    _vetrina:URL 
+    def __init__(self, username:str, registrazione:datetime,vetrina:URL):
+        super().__init__(username, registrazione)
+        self.set_vetrina(vetrina)
+
+    
+    
+    def set_vetrina(self,v:URL):
+        self._vetrina=v
+    
+    def get_vetrina(self)->URL :
+        return self._vetrina
+    
