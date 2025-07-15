@@ -4,8 +4,7 @@ from UtentePrivato import UtentePrivato
 from Asta import Asta
 
 
-#[V.UtentePrivato.selfBid] Gli utenti privati non possono fare
-#  bid sulle aste pubblicate da loro.
+
 
 #responsabilità doppia , gestione asimmetrica da Bid 
 class Bid:
@@ -44,6 +43,8 @@ class Bid:
         if not u: raise ValueError("l' utente non deve essere None")
         self._utente=u
     
+
+
 
 
 

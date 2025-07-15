@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from custom_types import *
+from eBuy.design.custom_types import *
 from datetime import date
 
 class PosizioneMilitare:

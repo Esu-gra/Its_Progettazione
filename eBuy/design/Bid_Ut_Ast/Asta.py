@@ -1,6 +1,6 @@
 from datetime import datetime
 from UtentePrivato import UtentePrivato
-from custom_types import *
+from eBuy.design.custom_types import *
 from Bid import Bid 
 
 class Asta :

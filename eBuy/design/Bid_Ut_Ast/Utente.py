@@ -1,6 +1,6 @@
 from abc import *
 from datetime import datetime
-from custom_types import *
+from eBuy.design.custom_types import *
 
 
 

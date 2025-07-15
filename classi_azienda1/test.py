@@ -1,5 +1,5 @@
 from classi import *
-from custom_types import *
+from eBuy.design.custom_types import *
 from classi_new import *
 from datetime import date, timedelta
 

@@ -15,5 +15,3 @@ class UtentePrivato(Utente):
 
 
 
-u=UtentePrivato("asdrubale",2011-11-4)
-print(u.registrazione)
