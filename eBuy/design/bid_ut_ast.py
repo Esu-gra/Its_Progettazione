@@ -34,7 +34,7 @@ class Asta:
     def get_prezzo_rialzo(self)->FloatGEZ:
         return self._prezzo_rialzo
 
-    def __repr__(self)->frozenset:
+    def bid_asta(self)->frozenset['Bid']:
         return frozenset(self._bid_asta)
     
 
@@ -108,8 +108,8 @@ class UtentePrivato(Utente):
     
 
     #ritorno il set di bid 
-    def __repr__(self)->frozenset:
-        return frozenset(self._bid_ut)
+    def bids(self)->frozenset['Bid']:
+        return 
 
     def __str__(self)->str:
         return f"{self.get_username()} (registrato il {self.get_registrazione()})"
@@ -169,8 +169,8 @@ registrazione = datetime(2024, 8, 1,23, 55, 59, 342380)
 u = UtentePrivato("Esu", registrazione)
 a = Asta(datetime(2024, 8, 31), FloatGEZ(100))
 b = Bid(datetime(2024, 8, 21), a, u)
-print(b.__repr__())
-print(hash(b))
+
+
 
 
 print(f"Utente: {u.get_username()}")
