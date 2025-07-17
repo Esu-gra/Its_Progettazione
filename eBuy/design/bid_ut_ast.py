@@ -2,7 +2,24 @@
 from datetime import datetime,timedelta
 
 from abc import ABC, abstractmethod
-from custom_types import FloatGEZ
+
+
+
+
+
+
+class FloatGEZ(float):
+    def __new__(cls, v: int | float | str):
+        try:
+            value = float(v)
+        except ValueError:
+            raise TypeError(f"Il valore '{v}' non è convertibile in float.")
+        
+        if value < 0:
+            raise ValueError(f"Il valore inserito deve essere maggiore o uguale a zero: {value}")
+        
+        return super().__new__(cls, value)
+
 
 
 
@@ -109,7 +126,7 @@ class UtentePrivato(Utente):
 
     #ritorno il set di bid 
     def bids(self)->frozenset['Bid']:
-        return 
+        return frozenset(self._bid_ut)
 
     def __str__(self)->str:
         return f"{self.get_username()} (registrato il {self.get_registrazione()})"
