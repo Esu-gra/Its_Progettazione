@@ -1,7 +1,7 @@
-from tipiDato import IntGZ
-from tipiDato import DataGE1895
+from custom_types import IntGZ
+from custom_types import DataGE1895
 from datetime import timedelta
-from citta_nazione import *
+# from citta_nazione import *
 
 
 class Volo :

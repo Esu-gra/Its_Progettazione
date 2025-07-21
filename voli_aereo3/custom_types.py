@@ -78,31 +78,23 @@ class DataGE1895(date):
 
 
 
-class URL:
-    def __init__(self, indirizzo: str):
-        if not self._valida_url(indirizzo):
-            raise ValueError(f"URL non valido: {indirizzo}")
-        self.indirizzo = indirizzo
-
-    def _valida_url(self, url: str) -> bool:
-       
-        pattern = r'^https?://[\w\-\.]+\.\w+.*$'
-        return re.match(pattern, url) is not None
-
-    def __str__(self):
-        return self.indirizzo
+class URL(str):
+   def __new__(cls,v:str|Self)->Self:
+        if not re.search("(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?",v):
+             raise ValueError(f"{v} non è un URL valido.")
+        return  int.__new__(cls,v)
 
 
 
 class FloatGEZ(float):
-    def __new__(cls, v: int | float | str):
-        try:
-            value = float(v)
-        except ValueError:
-            raise TypeError(f"Il valore '{v}' non è convertibile in float.")
-        
-        if value < 0:
-            raise ValueError(f"Il valore inserito deve essere maggiore o uguale a zero: {value}")
-        
-        return super().__new__(cls, value)
+    def __new__(cls,v:int|float|Self)->Self:
+         if v<0:
+              raise ValueError(f"Il valore di {v} deve essere >=0.")
+         return float.__new__(cls,v)
 
+class FloatGZ(float):
+    def __new__(cls,v:int|float|Self)->Self:
+         if v<=0:
+              raise ValueError(f"Il valore di {v} deve essere > 0.")
+         return float.__new__(cls,v)
+    
