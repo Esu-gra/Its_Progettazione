@@ -79,7 +79,14 @@ class IntGEZ(int):
             return IntGZ(result)
         except ValueError:
             raise ValueError(f"Risultato della differenza non valido è minore di zero")
-        
+
+
+class IntGET(IntGEZ):
+    def __new__(cls, v:int|float|Self) -> Self:
+        if v < 2:
+            raise ValueError(f"Il valore di {v} deve essere >= 2.")
+        return IntGEZ.__new__(cls, v)
+     
 
 class DataGE1895(date):
     def __new__(cls,year,month,day):

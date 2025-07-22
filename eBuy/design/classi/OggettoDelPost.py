@@ -1,7 +1,7 @@
 from abc import abstractmethod,ABC
 
 from typing import TYPE_CHECKING
-from custom_types import IntGEZ,FloatGEZ,Condizioni
+from custom_types import IntGEZ,FloatGEZ,Condizioni,IntGET
 
 
 if TYPE_CHECKING:
@@ -29,7 +29,8 @@ class OggettoDelPost(ABC):
         self._pubblicazione=datetime.datetime.now()
         self.set_prezzo(prezzo)
         self.set_is_nuovo(is_nuovo)
-        self.set_condizioni(condizioni)
+        if condizioni:
+            self.set_condizioni(condizioni)
        
 
     
@@ -48,8 +49,12 @@ class OggettoDelPost(ABC):
         return self._anni_garanzia
     
 
-    def set_anni_garanzia(self,v:IntGEZ):
-        self._anni_garanzia=v
+    def set_anni_garanzia(self,anni_garanzia:IntGEZ):
+        if self.is_nuovo():
+            anni_garanzia=IntGET(anni_garanzia)
+        self._anni_garanzia=anni_garanzia
+            
+
 
 
     def pubblicazione(self)->datetime:
@@ -71,6 +76,8 @@ class OggettoDelPost(ABC):
         return self._condizioni
     
     def set_condizioni(self,condizioni:Condizioni)->None:
+        if self.is_nuovo():
+            raise ValueError("Non si puo impostare le condizioni se l'oggetto è nuovo.")
         self._condizioni=condizioni
 
        #__repr__
@@ -164,3 +171,6 @@ def test_asta_base():
     rialzo = FloatGEZ(20)
 
     asta = Asta(descrizione, anni_garanzia, prezzo, is_nuovo, condizioni, scadenza, rialzo)
+    return asta
+
+print(test_asta_base())
