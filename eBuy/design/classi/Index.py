@@ -66,4 +66,4 @@ s2=Studente("Mario")
 index_student.add(s1,"A1")
 
 
-print(index_student.name())
+print(index_student.get(s1))

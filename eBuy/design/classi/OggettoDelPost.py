@@ -1,6 +1,6 @@
 from abc import abstractmethod,ABC
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING,Any,Self
 from custom_types import IntGEZ,FloatGEZ,Condizioni,IntGET
 
 
@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from Bid import Bid 
     from asta_bid import asta_bid
     from Utente import UtentePrivato
+    from Index import Index
 
 
 import datetime
@@ -20,6 +21,7 @@ class OggettoDelPost(ABC):
     _prezzo:FloatGEZ
     _is_nuovo:bool
     _condizioni:Condizioni  #Condizioni
+    _index:Index[int,Self]=Index[int,Self]('OggettoDelPost')
 
     
     @abstractmethod
@@ -31,6 +33,27 @@ class OggettoDelPost(ABC):
         self.set_is_nuovo(is_nuovo)
         if condizioni:
             self.set_condizioni(condizioni)
+        self._set_id()
+
+    
+    @classmethod
+    def all(cls):
+        return cls._index.all()
+    
+    @classmethod
+    def get(cls,key:Any)->Self|None:
+        return cls._index.get(key)
+    
+
+    def _set_id(self)->None:
+        key_list=list(self._index.all_keys())
+        if len(key_list)>0:
+            last_id=max(key_list)
+            id=last_id+1
+        else:
+            id=0
+        self._index.add(id,self)
+        self._id=id
        
 
     
