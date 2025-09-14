@@ -1,3 +1,5 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING, Any, Self, Tuple
 from classi.bid_ut import bid_ut
 from classi.asta_bid import asta_bid
 from classi.OggettoDelPost import Asta
@@ -6,11 +8,12 @@ from classi.Utente import UtentePrivato
 import datetime
 
 
+# if TYPE_CHECKING:
+#     from classi import Index
 
 
 
 class Bid:
-    
     _istante:datetime               #<<imm>>
     _asta_bid_link:asta_bid._link   #<<imm>>, certamente noto alla nascita 
     _bid_ut:bid_ut._link            #<<imm>>, certamente noto alla nascita 

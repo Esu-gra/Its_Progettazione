@@ -36,4 +36,4 @@ class asta_bid:
         return (self.bid(),self.asta()==(value.bid(),value.asta()))
         
     def __repr__(self):
-        return f"bid_ut(bid={self.bid()},asta={self.asta()})"
+        return f"asta_bid(asta={self.asta()},asta={self.bid()})"
