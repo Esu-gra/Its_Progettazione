@@ -18,8 +18,6 @@ create domain RealGZ as real
 create domain IntGEZ as integer 
 	check (value >= 0);
 
-create type Condizione as enum
-	('Ottimo', 'Buono', 'Discreto', 'Da sistemare');
+create type Condizione as enum('Ottimo', 'Buono', 'Discreto', 'Da sistemare');
 
-create type Popolarita as enum
-	('Bassa', 'Media', 'Alta');
+create type Popolarita as enum('Bassa', 'Media', 'Alta');
