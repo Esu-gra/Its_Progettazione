@@ -38,10 +38,10 @@ create table postoggetto(
     pubblica Stringa not null,
     descrizione Stringa not null,
     pubblicazione timestamp not null,
-    ha_feedback boolean not null,
+    ha_feedback boolean default false,
     voto Voto,
     commento Stringa,
-    istante_feedback timestamp,
+    istante_feedback timestamp default false,
     categoria Stringa not  null,
     -- vincoli di ennupla per modellare [V.PostOggetto.feedback]
     CHECK ((ha_feedback = TRUE) = (voto IS NOT NULL AND istante_feedback IS NOT NULL)),
@@ -54,7 +54,7 @@ foreign key(pubblica)
    references utente(username)
 );
 ALTER TABLE postoggetto 
-ADD UNIQUE(id,pubblica);
+ADD UNIQUE(id,pubblica);-->chiave minimale ,serve per la fo
 
 create table postoggettonuovo(
     postoggetto integer primary key,
@@ -67,6 +67,8 @@ create table postoggettonuovo(
         references postoggetto(id,pubblica)
 );
 
+-- i vincoli complite e disjoint su posoggetto  nuovo/usato non sono ancora implementati 
+-- i vincoli complite e disjoint su posoggetto  asta/comprasubito non sono ancora implementati 
 create table metodopagamento(
     nome Stringa primary key
 );
@@ -76,7 +78,7 @@ create table met_pos(
     metodopagamento Stringa not null,
     primary key(postoggetto,metodopagamento),
     foreign key(postoggetto)
-        references postoggetto(id),
+        references postoggetto(id) deferrable,
     foreign key(metodopagamento)
        references metodopagamento(nome)
 );
@@ -86,7 +88,7 @@ create table postoggettousato(
     condizione Condizione not null,
     anni_garanzia IntGEZ not null,
     foreign key(postoggetto)
-       references postoggetto(id)
+       references postoggetto(id) deferrable
 );
 
 
@@ -104,7 +106,7 @@ create table bid(
     asta integer not null,
     privato Stringa not null,
     istante timestamp not null,
-    unique(istante),
+    unique(istante)--implementa l'id2 sull'istante,
     foreign key(asta)
        references asta(postoggetto),
     foreign key(privato)
@@ -112,7 +114,7 @@ create table bid(
 );
 
 create table comprasubito(
-    postoggetto serial primary key,
+    postoggetto integer primary key,
     prezzo RealGZ not null,
     istante timestamp not null,
     priv Stringa not null,
@@ -120,5 +122,6 @@ create table comprasubito(
         references postoggetto(id),
     foreign key(priv)
       references privato(utente)
+    check((priv is null)=(istante is null))
 );
 
